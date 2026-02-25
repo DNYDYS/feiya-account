@@ -1,0 +1,2 @@
+-- 创建数据库
+CREATE DATABASE IF NOT EXISTS feiya_account DEFAULT CHARSET utf8mb4;

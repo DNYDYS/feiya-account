@@ -1,0 +1,69 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+spring:
+  # 放行Knife4j文档接口（避免被JWT/IP限流拦截）
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher # 兼容Knife4j路径匹配
+  # 数据库配置（改你的MySQL用户名/密码）
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/feiya_account?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root  # 改成你的MySQL用户名
+    password: admin  # 改成你的MySQL密码
+    # 连接池配置
+    initial-size: 5
+    min-idle: 5
+    max-active: 20
+    max-wait: 60000
+    time-between-eviction-runs-millis: 60000
+    min-evictable-idle-time-millis: 300000
+    validation-query: SELECT 1 FROM DUAL
+    test-while-idle: true
+    test-on-borrow: false
+    test-on-return: false
+    redis:
+      host: localhost # Redis服务器地址（本地默认）
+      port: 6379 # Redis端口（本地默认）
+      password:  # 密码（本地Redis默认无密码，有密码则填写）
+      database: 0 # 使用的数据库编号（0-15）
+      timeout: 5000 # 连接超时时间（5秒）
+      lettuce: # 连接池配置（Spring Boot 3.x默认用Lettuce）
+        pool:
+          max-active: 10 # 最大活跃连接数
+          max-idle: 5 # 最大空闲连接数
+          min-idle: 2 # 最小空闲连接数
+
+
+
+# MyBatis-Plus基础配置
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl  # 打印SQL日志（方便调试）
+
+
+
+# 保留原有配置，新增以下内容
+feiya:
+  jwt:
+    secret: feiyaAccount2026#SecretKey123456  # 与JwtUtil中的默认值一致
+    expire: 86400000  # token过期时间（24小时）
+  ip-limit:
+    max-count: 200 # 每个IP每分钟最大请求数
+    expire: 60     # 限流时间窗口（秒）
+
+# Knife4j接口文档配置
+knife4j:
+  enable: true # 开启Knife4j
+  openapi:
+    title: 飞鸭AI记账框架接口文档
+    description: 飞鸭AI记账核心接口文档
+    version: 1.0.0
+    contact:
+      name: 开发团队
+      email: dev@feiya.com
+
