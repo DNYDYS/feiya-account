@@ -22,12 +22,6 @@ import java.util.concurrent.TimeUnit;
 @Tag(name = "用户模块", description = "用户登录、信息查询接口")
 public class UserController {
 
-//    private final JwtUtil jwtUtil;
-//
-//    public UserController(JwtUtil jwtUtil) {
-//        this.jwtUtil = jwtUtil;
-//    }
-
     @Autowired
     private RedisTemplate redisTemplate;
 

@@ -28,14 +28,6 @@ public class IpLimitInterceptor implements HandlerInterceptor {
     @Autowired
     RedissonClient redissonClient;
 
-//    // 注入Redisson客户端（自动配置，无需手动创建）
-//    private final RedissonClient redissonClient;
-//
-//    // 构造器注入RedissonClient
-//    public IpLimitInterceptor(RedissonClient redissonClient) {
-//        this.redissonClient = redissonClient;
-//    }
-
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         // 1. 原生Java获取客户端真实IP（兼容代理/Nginx）
