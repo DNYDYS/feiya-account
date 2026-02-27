@@ -39,11 +39,15 @@ spring:
 
 
 
-# MyBatis-Plus基础配置
+# MyBatis-Plus配置
 mybatis-plus:
   configuration:
-    map-underscore-to-camel-case: true
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl  # 打印SQL日志（方便调试）
+    map-underscore-to-camel-case: true # 下划线转驼峰（必须开启）
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # 打印SQL（开发阶段开启）
+  global-config:
+    db-config:
+      id-type: auto # 主键自增
+  # mapper-locations: classpath:mapper/**/*.xml # Mapper.xml路径（如果有）
 
 
 
@@ -52,6 +56,12 @@ feiya:
   jwt:
     secret: feiyaAccount2026#SecretKey123456  # 与JwtUtil中的默认值一致
     expire: 86400000  # token过期时间（24小时）
+    access-token-expire: 7200000 # 访问令牌过期时间：2小时（毫秒）
+    refresh-token-expire: 604800000 # 刷新令牌过期时间：7天（毫秒）
+
+#    secret: feiya-ai-account-secret-key-2026 # 生产环境建议用32位以上随机字符串
+#    access-token-expire: 7200000 # 访问令牌过期时间：2小时（毫秒）
+#    refresh-token-expire: 604800000 # 刷新令牌过期时间：7天（毫秒）
   ip-limit:
     max-count: 200 # 每个IP每分钟最大请求数
     expire: 60     # 限流时间窗口（秒）

@@ -56,8 +56,9 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addInterceptor(jwtInterceptor)
                 .addPathPatterns("/**")
                 .excludePathPatterns(
-                        "/user/login",
-                        "/hello",
+                        "/user/login",        // 登录接口
+                        "/user/refresh-token", // 放行续期接口
+                        "/hello",             //测试接口
                         "/doc.html",          // Knife4j主页
                         "/webjars/**",        // 文档静态资源
                         "/v3/api-docs/**",    // OpenAPI接口
