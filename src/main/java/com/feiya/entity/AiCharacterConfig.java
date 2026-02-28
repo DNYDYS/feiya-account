@@ -41,7 +41,7 @@ public class AiCharacterConfig implements Serializable {
      * 情绪-表情包映射（JSON格式）
      * 注意：数据库是JSON类型，这里用JSONObject接收
      */
-    private JSONObject emotionMapping;
+    private String emotionMapping;
 
     /**
      * 状态：1-启用，0-禁用

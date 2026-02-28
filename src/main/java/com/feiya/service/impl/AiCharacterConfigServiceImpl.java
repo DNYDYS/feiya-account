@@ -1,5 +1,6 @@
 package com.feiya.service.impl;
 
+import com.alibaba.fastjson2.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.feiya.entity.AiCharacterConfig;
@@ -57,7 +58,8 @@ public class AiCharacterConfigServiceImpl extends ServiceImpl<AiCharacterConfigM
     public Map<String, String> getEmotionMapping(String characterId) {
         AiCharacterConfig config = this.getByCharacterId(characterId);
         // JSON对象转Map
-        return config.getEmotionMapping().to(Map.class);
+        Map map = JSONObject.parseObject(config.getEmotionMapping(), Map.class);
+        return map;
     }
 
     /**
